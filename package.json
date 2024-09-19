@@ -1,0 +1,30 @@
+{
+  "name": "webnc",
+  "version": "1.0.0",
+  "description": "nodejs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon --exec babel-node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Hung-Thinhh/WebNC.git"
+  },
+  "author": "HT90",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Hung-Thinhh/WebNC/issues"
+  },
+  "homepage": "https://github.com/Hung-Thinhh/WebNC#readme",
+  "dependencies": {
+    "@babel/core": "^7.25.2",
+    "@babel/node": "^7.25.0",
+    "@babel/preset-env": "^7.25.4",
+    "babel": "^6.23.0",
+    "dotenv": "^16.4.5",
+    "ejs": "^3.1.10",
+    "express": "^4.21.0",
+    "nodemon": "^3.1.5"
+  }
+}
