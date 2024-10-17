@@ -1,5 +1,16 @@
 <%- include(header) %>
-<table class="table">
+<style>
+  .container{
+            margin: 0 auto;
+            padding: 30px;
+        }
+        table{
+          width: 80% !important;
+        }
+</style>
+<div class="container" style="min-height: 70vh;">
+  <button type="button" class="btn btn-primary"><a class="nav-link" href="/addUser">Create User</a></button>
+  <table class="table">
     <thead>
       <tr>
         <th scope="col">STT</th>
@@ -10,22 +21,38 @@
       </tr>
     </thead>
     <tbody>
-      
       <% for (let i = 0; i < user.length; i++) { %>
-        
-        <tr>
-            <th scope="row"><%= i+1 %></th>
-            <td><%= user[i].username %></td>
-            <td><%= user[i].fullname %></td>
-            <td><%= user[i].address %></td>
-            <td>
-                <button type="button" class="btn"><i class="fa-regular fa-eye"></i></button>
-                <button type="button" class="btn"><i class="fa-regular fa-pen-to-square"></i></button>
-                <button type="button" class="btn"><i class="fa-regular fa-trash-can"></i></button>
-            </td>
-          </tr>
+
+      <tr>
+        <th scope="row"><%= i+1 %></th>
+        <td><%= user[i].username %></td>
+        <td><%= user[i].fullname %></td>
+        <td><%= user[i].address %></td>
+        <td style="display: flex;">
+          <!-- Button trigger modal -->
+          <button type="button" class="btn">
+            <a href="/detail-user/<%= user[i].id %>">
+              <i class="fa-regular fa-eye"></i
+            ></a>
+          </button>
+
+          <button type="button" class="btn">
+            <a href="/edit-user/<%= user[i].id %>">
+              <i class="fa-regular fa-pen-to-square"></i>
+            </a>
+          </button>
+          <form method="post" action="/api/delete-user/<%= user[i].id %>">
+            <button type="submit" class="btn">
+              <a href="/delete-user/<%= user[i].id %>">
+                <i class="fa-regular fa-trash-can"></i>
+              </a>
+            </button>
+          </form>
+        </td>
+      </tr>
       <% } %>
     </tbody>
   </table>
+</div>
 
 <%- include(footer) %>

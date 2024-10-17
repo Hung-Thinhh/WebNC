@@ -1,0 +1,57 @@
+<%- include(header) %>
+<div class="container">
+    <style>
+        .container{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        form{
+            width: 50%;
+            margin: 30px;
+            padding: 30px;
+            border: 1px solid #000;
+        }
+        fieldset{
+            padding-top: 20px;
+        }
+    </style>
+<form class="row g-3">
+    <div class="col-md-6">
+      <label for="inputEmail4" class="form-label">Username</label>
+      <input type="email" class="form-control" id="inputEmail4" value="<%= user.username %>">
+    </div>
+    <div class="col-md-6">
+      <label for="inputPassword4" class="form-label">Full name</label>
+      <input type="text" class="form-control" id="inputPassword4" value="<%= user.fullname %>">
+    </div>
+    <div class="col-12">
+      <label for="inputEmail" class="form-label">Email</label>
+      <input type="text" class="form-control" id="inputEmail" placeholder="1234 Main St" value="<%= user.email %>">
+    </div>
+    <div class="col-12">
+      <label for="inputAddress" class="form-label">Address</label>
+      <input type="text" class="form-control" id="inputAddress" placeholder="Apartment, studio, or floor" value="<%= user.address %>">
+    </div>
+    
+    <fieldset class="row mb-3 col-12">
+        <legend class="col-form-label col-sm-2 pt-0">Sex</legend>
+        <div class="col-sm-10">
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" <%= user.sex === 'nam' ? 'checked' : '' %> >
+            <label class="form-check-label" for="gridRadios1">
+              Nam
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2" <%= user.sex === 'nu' ? 'checked' : '' %>>
+            <label class="form-check-label" for="gridRadios2">
+              Nữ
+            </label>
+          </div>
+          
+        </div>
+      </fieldset>
+  </form>
+</div>
+  <%- include(footer) %>
