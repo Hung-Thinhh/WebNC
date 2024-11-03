@@ -7,6 +7,7 @@ const UserController = async (req, res) => {
     return res.render("user", {
       header: "header",
       footer: "footer",
+      authen:req.user,
       user: users, // Gán users vào biến user trong view
     });
   } catch (err) {
@@ -20,6 +21,7 @@ const addUser = async (req, res) => {
     return res.render("addUser", {
       header: "header",
       footer: "footer",
+      authen:req.user,
     });
   } catch (err) {
     console.error("Error fetching users:", err);
@@ -50,6 +52,7 @@ const DetailUser = async (req, res) => {
     return res.render("detailUSer", {
       header: "header",
       footer: "footer",
+      authen:req.user,
       user: user, // Gán users vào biến user trong view
     });
   } catch (err) {
@@ -65,6 +68,7 @@ const EditUser = async (req, res) => {
     return res.render("editUser", {
       header: "header",
       footer: "footer",
+      authen:req.user,
       user: user, // Gán users vào biến user trong view
     });
   } catch (err) {

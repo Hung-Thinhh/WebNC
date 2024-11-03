@@ -1,7 +1,8 @@
 const AboutController = (req, res) => {
     return res.render('about', {
         header: "header",
-        footer: "footer"
+        footer: "footer",
+        authen:req.user
         
     });
 }

@@ -1,7 +1,8 @@
 const HomeController = (req, res) => {
     return res.render('main', {
         header: "header",
-        footer: "footer"
+        footer: "footer",
+        authen:req.user
         
     });
 }
