@@ -26,9 +26,9 @@ const verifyToken = (token) => {
 const nonSecurePaths = [
   "/signup",
   "/login",
-  "/api/logout",
   "/api/login",
   "/api/signup",
+  "/api/getNhom","/getNhom"
 ];
 const adminSecurePaths = [
   "/api/editUser",
@@ -48,10 +48,15 @@ const extractToken = (req) => {
   return null;
 };
 const checkUserJWT = (req, res, next) => {
-  if (nonSecurePaths.includes(req.path)) return next();
-
+  console.log('api ne: ',req.path);
+  if (nonSecurePaths.includes(req.path)) {
+    console.log('saoooooooooooooooo');
+    
+    return next()
+  }
+  else {
+    
   let cookies = req.session.authen;
-  console.log(req.path);
 
   let tokenFromHeader = extractToken(req);
   if (cookies || tokenFromHeader) {
@@ -77,6 +82,8 @@ const checkUserJWT = (req, res, next) => {
       EM: "Not authenticated the user",
     });
   }
+  }
+
 };
 const checkUser = (req, res, next) => {
   if (nonSecurePaths.includes(req.path)) return next();

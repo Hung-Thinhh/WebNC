@@ -1,4 +1,4 @@
-import { getUsers, getUser, editUser,delUsers, addUsers } from "../service/userService";
+import { getUsers, getUser, editUser,delUsers, addUsers,getProfileUser } from "../service/userService";
 
 const UserController = async (req, res) => {
   try {
@@ -60,6 +60,21 @@ const DetailUser = async (req, res) => {
     res.status(500).json({ message: "Internal server error" });
   }
 };
+const getProfile = async (req, res) => {
+  try {
+    const id = req.user.id
+    const user = await getProfileUser(id); // Truyền req và res vào hàm getUsers
+
+    return res.status(200).json({
+      EM: 'ok',
+      EC: '0',
+      DT: user,
+    });
+  } catch (err) {
+    console.error("Error fetching users:", err);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
 const EditUser = async (req, res) => {
   try {
     const id = req.params.id;
@@ -112,5 +127,5 @@ export {
   EditUserController,
   deleteUserController,
   addUser,
-  AddUserController
+  AddUserController,getProfile
 };

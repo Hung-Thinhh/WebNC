@@ -1,7 +1,7 @@
 require("dotenv").config();
 import bcrypt from "bcryptjs";
 import { createToken } from "../middleware/jwt";
-import pool from "../config/connectDB";
+import db from "../models/index";
 // get the promise implementation, we will use bluebird
 var salt = bcrypt.genSaltSync(10);
 
@@ -10,9 +10,11 @@ const hashPassword = (password) => {
   return pass_hash;
 };
 const checkEmail = async (email) => {
-  const [user] = await pool
-    .getPool()
-    .query("SELECT * FROM users WHERE email = ?", [email]);
+  const user = await db.User.findAll({
+    where: {
+      email: email
+    }
+  });
   console.log(user);
 
   if (user) {
@@ -21,11 +23,13 @@ const checkEmail = async (email) => {
   return false;
 };
 const checkUsername = async (name) => {
-  const [user] = await pool
-    .getPool()
-    .query("SELECT * FROM users WHERE username = ? ", [name]);
+  const user = await db.User.findAll({
+    where: {
+      username: name
+    }
+  });
   console.log(user);
-  if (user[0]) {
+  if (user.length>0) {
     return true;
   }
   return false;
@@ -44,14 +48,13 @@ const handleRegister = async (data) => {
     }
 
     let hashPass = hashPassword(data.password);
-    const [rows] = await pool
-      .getPool()
-      .query("insert into users(username,password,email) values (?,  ?,  ?)", [
-        data.username,
-        hashPass,
-        data.email,
-      ]);
-    if (rows.affectedRows > 0) {
+    const user = await db.User.create({
+      username: data.username,
+      password: hashPass,
+      email: data.email
+    });
+   
+    if (user) {
       return {
         EM: "A user created successfully",
         EC: "0",
@@ -75,20 +78,21 @@ const checkPassword = (inputPassword, hashPassword) => {
 };
 const handleLogin = async (data) => {
   try {
-    const [user] = await pool
-      .getPool()
-      .query("SELECT * FROM users WHERE username = ? ", [data.username]);
-    if (user[0]) {
-      console.log("hahah");
-      let isCorrectPassword = await checkPassword(
+    const user = await db.User.findOne({
+      where: {
+        username: data.username
+      }
+    });
+    if (user) {
+      let isCorrectPassword =  checkPassword(
         data.password,
-        user[0].password
+        user.password
       );
       if (isCorrectPassword) {
         let payload = {
-          username: user[0].username,
-          id: user[0].id,
-          role: user[0].role,
+          username: user.username,
+          id: user.id,
+          role: user.role,
           // active: user.active,
           // thongbao: user.thongbao,
         };

@@ -1,6 +1,8 @@
 import express from "express";
-import { EditUserController ,deleteUserController,AddUserController} from '../controller/userController';
-import {handleSignup,handleLogin,handleLogout} from '../controller/authenController'
+import { EditUserController ,deleteUserController,AddUserController,getProfile} from '../controller/userController';
+import { handleSignup, handleLogin, handleLogout, accountUser } from '../controller/authenController'
+import {getNhom} from '../controller/nhomController'
+import {getListSanPham,getSanPham} from '../controller/sanphamController'
 import {checkUserJWT,checkUserPermission} from '../middleware/jwt'
 const router = express.Router();
 
@@ -25,6 +27,22 @@ const initApiRouter = (app) => {
     router.get("/logout", (req, res) => {
         handleLogout(req, res)
     });
+    router.get("/account",(req, res) => {
+        accountUser(req, res)
+    })
+    router.get("/profile",(req, res) => {
+        getProfile(req, res)
+    })
+    router.get("/getNhom",(req, res) => {
+        getNhom(req, res)
+    })
+    router.get("/getListSanPham/:id",(req, res) => {
+        getListSanPham(req, res)
+    })
+    router.get("/getSanPham/:id",(req, res) => {
+        getSanPham(req, res)
+    })
+
   
 
 

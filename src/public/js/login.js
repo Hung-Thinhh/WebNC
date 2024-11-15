@@ -161,11 +161,9 @@ $(document).ready(function () {
     if (path == "/login") {
       console.log("doi qua register");
 
-      window.history.pushState({}, "", "http://localhost:3000/register");
     } else {
       console.log("doi qua login");
 
-      window.history.pushState({}, "", "http://localhost:3000/login");
     }
     if ($("a.switch").hasClass("active")) {
       $(this)

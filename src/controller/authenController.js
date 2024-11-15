@@ -54,7 +54,10 @@ const handleLogin = async (req, res) => {
 }
 const handleLogout = async (req, res) => {
   try {
+    console.log('hahahahah');
+    
     req.session.destroy()
+    res.cookie('connect.sid', null, { expires: new Date(0) });
     return res.status(200).json({
       EM: "clear cookies",
       EC: "0",
@@ -70,4 +73,18 @@ const handleLogout = async (req, res) => {
     });
   }
 };
-module.exports = {handleSignup,handleLogin,handleLogout}
+const accountUser = (req, res) => {
+  console.log(req.user);
+  return res.status(200).json({
+    EM: "ok!",
+    EC: "0",
+    DT: {
+      access_token: req.token,
+      role: req.user.role,
+      email: req.user.email,
+      username: req.user.username,
+      active: req.user.active,
+    },
+  });
+};
+module.exports = {handleSignup,handleLogin,handleLogout,accountUser}

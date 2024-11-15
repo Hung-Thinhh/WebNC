@@ -5,7 +5,7 @@ const pool = mysql.createPool({
   host: "localhost", // Địa chỉ host của MySQL
   user: "root", // Tên người dùng MySQL
   password: "", // Mật khẩu của MySQL
-  database: "thweb", // Tên database muốn kết nối
+  database: "ltwebnc", // Tên database muốn kết nối
   port: "3306",
 });
 
